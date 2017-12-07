@@ -86,6 +86,15 @@ then
 fi
 
 cd $webroot
+
+if [ ! -f ./artisan ]
+then
+    composer create-project laravel/laravel ./
+    chmod -fR 777 ./storage
+fi
+
+
+
 composer update
 php artisan migrate
 
