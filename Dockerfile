@@ -57,6 +57,10 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
 
 ##################  CONFIGURATION STARTS  ##################
 
+RUN mkdir /var/adminer &&\
+    chmod -fR 777 /var/adminer
+
+ADD adminer-4.3.1-en.php /var/adminer/index.php
 ADD start.sh /start.sh
 ADD cron.sh /etc/periodic/15min/cron.sh
 ADD conf/supervisord.conf /etc/supervisord.conf
@@ -94,7 +98,7 @@ RUN chmod 755 /start.sh && \
 
 ##################  CONFIGURATION ENDS  ##################
 
-EXPOSE 443 80
+EXPOSE 443 80 86
 
 WORKDIR /var/www
 

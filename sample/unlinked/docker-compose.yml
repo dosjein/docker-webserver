@@ -1,0 +1,17 @@
+version: '2'
+services:
+    mysql:
+        image: mariadb:latest
+        env_file:
+            - ./.env
+    web:
+        build: ./
+        env_file:
+            - ./.env
+        ports:
+            - 8080:80
+            - 8086:86
+        links:
+            - mysql:mysql
+        environment:
+            - APP_KEY=base64:sRXaSRjIbvM9RojRGopkmMrieswdGApiZZ8sJQdvqR0=
