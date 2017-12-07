@@ -87,10 +87,15 @@ fi
 
 cd $webroot
 
+#Envirmoment has no Linked Stuff
 if [ ! -f ./artisan ]
 then
+    mkdir ./public
+    touch ./public/index.html
+    echo 'Creating Project Enviroment to NON Linked Enviroment' > ./public/index.html
     composer create-project laravel/laravel ./
     chmod -fR 777 ./storage
+    rm ./public/index.html
 fi
 
 
