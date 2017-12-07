@@ -1,9 +1,9 @@
 FROM nginx:mainline-alpine
-MAINTAINER Neo Ighodaro <hi@neo.ng>
+MAINTAINER Ronalds Sovas <sovas@dosje.in>
 
 ENV php_conf /etc/php7/php.ini
 ENV fpm_conf /etc/php7/php-fpm.d/www.conf
-ENV composer_hash 669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410
+ENV composer_hash 544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061
 
 ################## INSTALLATION STARTS ##################
 
@@ -49,7 +49,6 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     rm -Rf /var/www/* && \
     rm -Rf /etc/nginx/nginx.conf && \
     php7 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-    php7 -r "if (hash_file('SHA384', 'composer-setup.php') === '${composer_hash}') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
     php7 composer-setup.php --install-dir=/usr/bin --filename=composer && \
     php7 -r "unlink('composer-setup.php');" && \
     ln -s /usr/bin/php7 /usr/bin/php
@@ -59,11 +58,14 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
 ##################  CONFIGURATION STARTS  ##################
 
 ADD start.sh /start.sh
+ADD cron.sh /etc/periodic/15min/cron.sh
 ADD conf/supervisord.conf /etc/supervisord.conf
 ADD conf/nginx.conf /etc/nginx/nginx.conf
 ADD conf/nginx-site.conf /etc/nginx/sites-available/default.conf
+ADD conf/alias.txt /.alias
 
 RUN chmod 755 /start.sh && \
+    chmod 755 /etc/periodic/15min/cron.sh && \
     ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf && \
     sed -i \
         -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" \

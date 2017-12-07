@@ -75,14 +75,19 @@ sed -i "s/pm.min_spare_servers = 2/pm.min_spare_servers = 20/g" /etc/php7/php-fp
 sed -i "s/pm.max_spare_servers = 4/pm.max_spare_servers = 35/g" /etc/php7/php-fpm.d/www.conf
 sed -i "s/;pm.max_requests = 200/pm.max_requests = 0/g" /etc/php7/php-fpm.d/www.conf
 
+# ------------------------------------------
+# Add Envimental Setup for Aliases
+# ------------------------------------------
+echo 'Add Envimental Setup for Aliases'
 
-# /etc/php7/php-fpm.d/www.conf
-# CHANGE PHP SETTINGS FOR
-# pm.max_children = 70
-# pm.start_servers = 20
-# pm.min_spare_servers = 20
-# pm.max_spare_servers = 35
-# pm.max_requests = 500
+if [ ! -f ~/.bashrc ]
+then
+    echo "source /.alias" >> ~/.bashrc
+fi
+
+cd $webroot
+composer update
+php artisan migrate
 
 
 # ------------------------------------------
