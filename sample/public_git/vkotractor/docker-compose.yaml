@@ -1,0 +1,10 @@
+version: '2'
+services:
+    web:
+        build: ./
+        env_file:
+            - ./.env
+        ports:
+            - 8901:80
+        environment:
+            - APP_KEY=base64:sRXaSRjIbvM9RojRGopkmMrieswdGApiZZ8sJQdvqR0=

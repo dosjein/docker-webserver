@@ -6,6 +6,7 @@ alias san='php /var/www/artisan'
 alias cup='composer update'
 # From http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
 export MARKPATH=$HOME/.marks
+mkcd(){ NAME=$1; mkdir -p "$NAME"; cd "$NAME"; }
 function jump {
     cd -P $MARKPATH/$1 2> /dev/null || echo "No such mark: $1"
 }
