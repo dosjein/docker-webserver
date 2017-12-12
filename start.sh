@@ -98,6 +98,9 @@ cd $webroot
 # ------------------------------------------
 if [ ! -z "$PUBLIC_GIT" ]; then
     git clone $PUBLIC_GIT ./
+    if [ ! -z "$PUBLIC_GIT_BRANCH" ]; then
+        git fetch && git checkout $PUBLIC_GIT_BRANCH
+    fi
 fi
 
 # ------------------------------------------
