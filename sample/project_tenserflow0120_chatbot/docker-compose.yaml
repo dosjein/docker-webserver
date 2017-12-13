@@ -2,3 +2,8 @@ version: '2'
 services:
     web:
         build: ./
+        ports:
+            - 86:80
+            - "87:22"
+        volumes:
+            - ./models:/chatbot-rnn/models
