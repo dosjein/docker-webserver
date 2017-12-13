@@ -31,6 +31,6 @@ fi
 while true
 do 
 	chown -fR www-data:www-data /chatbot-rnn/
-    /chatbot-rnn/shell/cron.sh
+    eval "/chatbot-rnn/shell/cron.sh"
     sleep 1
 done

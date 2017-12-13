@@ -1,0 +1,17 @@
+version: '2'
+services:
+    chatbot:
+        image: shivergard/chatbot
+        volumes:
+            - ./php_requests:/chatbot-rnn/storage/php_requests 
+    vkontractor:
+        image: shivergard/docker-webserver
+        env_file:
+            - ./.env
+        links:
+            - chatbot:chatbot
+        environment:
+            - APP_KEY=base64:sRXaSRjIbvM9RojRGopkmMrieswdGApiZZ8sJQdvqR0=
+            - PUBLIC_GIT=https://github.com/dosjein/vkontractor.git
+            - CHATBOT_URL=http://chatbot
+            - CHATBOT_TOKEN=123456
