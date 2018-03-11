@@ -1,5 +1,6 @@
 alias hosts='cat /etc/hosts'
-alias c7='sudo chmod -fR 777 '
+alias c7='chmod -fR 777 '
+alias c8='chmod -R a+rwX '
 alias cl='clear'
 alias lah='ls -lah'
 alias host="/sbin/ip route|awk '/default/ { print $3 }'"

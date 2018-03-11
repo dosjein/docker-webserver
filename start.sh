@@ -89,6 +89,15 @@ echo 'Add Envimental Setup for Aliases'
 if [ ! -f ~/.bashrc ]
 then
     echo "source /.alias" >> ~/.bashrc
+    #Source Project Alias
+    if [ -f "$webroot/.alias" ]
+    then
+        echo "$webroot/.alias" >> ~/.bashrc
+    fi
+fi
+
+if [  -f "$webroot/start.sh" ]; then
+    screen -d -m -S project_start_sh bash -c '$webroot/start.sh'
 fi
 
 cd $webroot
