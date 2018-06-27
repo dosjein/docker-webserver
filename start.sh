@@ -96,11 +96,15 @@ then
     fi
 fi
 
-if [  -f "$webroot/start.sh" ]; then
-    screen -d -m -S project_start_sh bash -c '$webroot/start.sh'
+cd $webroot
+
+# ------------------------------------------
+# Hardcoded Project start Script
+# ------------------------------------------
+if [  -f "/var/www/start.sh" ]; then
+    screen -d -m -S project_start_sh bash -c '/var/www/start.sh'
 fi
 
-cd $webroot
 
 # ------------------------------------------
 # Public GIT Setup
